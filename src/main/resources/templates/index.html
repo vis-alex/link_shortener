@@ -5,15 +5,31 @@
     <title>Find Planet</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#compute").click(function () {
+                let long_link_input = document.getElementById("long_link");
+                console.log(long_link_input.valueOf().value)
+
+                $.post('/api/shortener/shorten?long_url=' + long_link_input.valueOf().value, function (data) {
+                    console.log(data)
+                    let short_link_output = document.getElementById("result");
+                    short_link_output.valueOf().value = data;
+                })
+            })
+        })
+    </script>
 
 </head>
 
 <body>
-<form action="" method="post">
-    <label for="long_link">Write URL for shorting</label>
-    <input id="long_link" type="text"/>
-</form>
 
+    <label for="long_link">Write URL for shorting</label><br>
+    <input id="long_link" type="text"/><br>
+
+    <button id="compute">Get the short url</button><br>
+
+    <input type="text" id="result"><br>
 
 </body>
 
