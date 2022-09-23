@@ -14,9 +14,9 @@ public class Shortener {
     @Id
     @Column(name = "short_url")
     @NotNull
-    private String logUrl;
+    private String shortUrl;
 
     @Column(name = "long_url")
     @NotNull
-    private String shortUrl;
+    private String longUrl;
 }

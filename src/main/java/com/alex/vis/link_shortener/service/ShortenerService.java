@@ -12,9 +12,27 @@ public class ShortenerService {
     private final ShortenerRepository shortenerRepository;
 
     public String save(String longUrl) {
+        Shortener alreadyExists = shortenerRepository.findByLongUrl(longUrl);
 
-        Hashids hashids = new Hashids(longUrl);
-        String token = hashids.encode(12345L);
-        return "https://shortener.com/" + token;
+        if (alreadyExists == null) {
+            Hashids hashids = new Hashids(longUrl);
+            String token = hashids.encode(12345L);
+            String shortUrl = "https://shortener.com/" + token;
+
+            Shortener newShortener = new Shortener(shortUrl, longUrl);
+            shortenerRepository.save(newShortener);
+            return shortUrl;
+        } else {
+            return alreadyExists.getShortUrl();
+        }
+    }
+
+    public String getLongUrl(String shortUrl) {
+        Shortener alreadyExists = shortenerRepository.findById(shortUrl).orElse(null);
+
+        if (alreadyExists != null) {
+            return alreadyExists.getLongUrl();
+        }
+        return "Url for this short link does not exists";
     }
 }
