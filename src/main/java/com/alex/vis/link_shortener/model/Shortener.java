@@ -1,18 +1,22 @@
 package com.alex.vis.link_shortener.model;
 
+import com.sun.istack.NotNull;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
+
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RedisHash("shortener")
+@Entity
+@Table(name = "urls")
 public class Shortener {
     @Id
-    private int id;
-
+    @Column(name = "short_url")
+    @NotNull
     private String logUrl;
 
+    @Column(name = "long_url")
+    @NotNull
     private String shortUrl;
 }
