@@ -1,4 +1,0 @@
--- INSERT INTO urls (short_url, long_url)
--- VALUES ('USER', 100000),
---        ('ADMIN', 100001),
---        ('USER', 100001);

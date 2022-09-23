@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS urls;
+
 CREATE TABLE urls
 (
     short_url varchar PRIMARY KEY NOT NULL,
